@@ -14,7 +14,6 @@ var storage = multer.diskStorage({
     cb(null, 'public')
   },
   filename: function (req, file, cb) {
-    console.log(req)
     cb(null, req.body.uuid + '-' + req.body.index + '-' + file.originalname )
   }
 });
@@ -30,9 +29,18 @@ app.post('/upload',function(req, res) {
            } else if (err) {
                return res.status(500).json(err);
            }
+
+      //console.log(req.body.uuid);
       return res.status(200).send(req.file);
     });
 });
+
+app.get('/getZip', function(req, res){
+    console.log(req.query.id);
+    return res.status(200).send('ok');
+});
+
+
 
 app.listen(8000, function() {
     console.log('App running on port 8000');

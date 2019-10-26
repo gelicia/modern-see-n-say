@@ -1,3 +1,7 @@
 .header {
     font-weight: bold;
 }
+
+.submitContainer {
+    padding: 20px;
+}

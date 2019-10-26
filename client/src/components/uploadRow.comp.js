@@ -7,16 +7,16 @@ export default function UploadRow(props) {
     }
 
     return (
-        <Row className={props.index % 2 === 0 ? 'even': 'odd'}>
+        <Row xs={10} className={props.index % 2 === 0 ? 'even': 'odd'}>
             <Col md="auto">{props.index + 1}</Col>
             <Col>
-                <InputGroup size="sm" className="mb-3">
-                    <FormControl type="file" aria-label="Upload picture" onChange={event => addFile(event, true)}/>
+                <InputGroup size="sm">
+                    <FormControl type="file" accept="image/bmp" aria-label="Upload picture" onChange={event => addFile(event, true)}/>
                 </InputGroup>
             </Col>
             <Col>
-                <InputGroup size="sm" className="mb-3">
-                    <FormControl type="file"  aria-label="Upload sound" onChange={event => addFile(event, false)}/>
+                <InputGroup size="sm">
+                    <FormControl type="file" accept="audio/wav"  aria-label="Upload sound" onChange={event => addFile(event, false)}/>
                 </InputGroup>
             </Col>
         </Row>
