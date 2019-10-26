@@ -14,7 +14,7 @@ function App() {
         <Navbar.Brand href="#home">Modern See N Say</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav pullRight className="mr-auto">
+          <Nav className="mr-auto">
             <LinkContainer to="/">
                 <NavItem>Home</NavItem>
               </LinkContainer>
