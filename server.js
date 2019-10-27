@@ -4,6 +4,11 @@ var multer = require('multer')
 var cors = require('cors');
 const uuidv1 = require('uuid/v1');
 var bodyParser = require('body-parser')
+var glob = require("glob")
+var JSZip = require("jszip");
+var JSZipUtils = require("jszip-utils");
+
+
 
 app.use(cors());
 app.use(bodyParser.json()); 
@@ -36,11 +41,30 @@ app.post('/upload',function(req, res) {
 });
 
 app.get('/getZip', function(req, res){
-    console.log(req.query.id);
+    var zip = new JSZip();
+    var count = 0;
+    var zipFilename = "zipFilename.zip";
+    glob("public/"+ req.query.id + "*", {}, function (er, files) {
+        files.forEach(file => {
+            var filename = "filename";
+            console.log(file);
+            // loading a file and add it in a zip file
+            JSZipUtils.getBinaryContent(file, {}, function (err, data) {
+               if(err) {
+                  throw err; // or handle the error
+               }
+               zip.file(filename, data, {binary:true});
+               count++;
+               if (count == urls.length) {
+                zip.generateAsync({type:'blob'}).then(function(content) {
+                    console.log(content);
+                });
+               }
+            });
+        });
+    });
     return res.status(200).send('ok');
 });
-
-
 
 app.listen(8000, function() {
     console.log('App running on port 8000');
